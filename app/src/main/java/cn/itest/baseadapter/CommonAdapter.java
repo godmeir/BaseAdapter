@@ -21,17 +21,19 @@ public abstract  class CommonAdapter<T> extends BaseAdapter {
     protected List<T> mDatas;
     protected final int mItemLayoutId;
     //原来的通用版
-//    public CommonAdapter(Context context, List<T> mDatas){
-//        mInflater = LayoutInflater.from(context);
-//        this.mContext = context;
-//        this.mDatas = mDatas;
-//    }
+//
     public CommonAdapter(Context context, List<T> mDatas, int itemLayoutId){
         mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.mDatas = mDatas;
         this.mItemLayoutId = itemLayoutId;
     }
+
+//    public CommonAdapter(Context context, List<T> mDatas){
+//        mInflater = LayoutInflater.from(context);
+//        this.mContext = context;
+//        this.mDatas = mDatas;
+//    }
 
 
     @Override

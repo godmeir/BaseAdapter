@@ -30,15 +30,22 @@ public class FoodInfoGrid extends Activity {
     private FoodBean fb10 = new FoodBean("螃蟹",R.drawable.loading_6);
     private FoodBean fb11 = new FoodBean("黄鳝",R.drawable.loading_8);
 
+    private FoodBean s1 = new FoodBean("黄鳝",R.drawable.fun_light_off);
+    private FoodBean s2 = new FoodBean("黄鳝",R.drawable.fun_light_off);
+    private FoodBean s3 = new FoodBean("黄鳝",R.drawable.fun_light_off);
+    private FoodBean s4 = new FoodBean("黄鳝",R.drawable.fun_light_off);
+
     private List<FoodBean> mDatas1 = new ArrayList<FoodBean>(Arrays.asList(fb1,fb2, fb3,
-            fb4, fb5, fb6, fb7, fb8, fb9, fb10, fb11));
-    private List<FoodBean> mDatas2 = new ArrayList<FoodBean>(Arrays.asList(fb1,fb2, fb3,
-            fb4, fb5));
+            fb4, fb5, fb6, fb7, fb8, fb9, fb10, fb11, fb5, fb6, fb7, fb8, fb9,
+            fb10, fb11, fb5, fb6, fb7, fb8, fb9, fb10, fb11));
+    private List<FoodBean> mDatas2 = new ArrayList<FoodBean>(Arrays.asList(s1,s2,s3,s4));
     private List<FoodBean> mDatas;
     private CommonAdapter mAdapter;
     private boolean flag = false;
     private Button bn, bn2;
     private boolean isShowDelete = false;//根据这个变量来判断是否显示删除图标，true是显示，false是不显示
+
+    private StatusBar statusBar = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,17 @@ public class FoodInfoGrid extends Activity {
         m3GridView = (GridView)findViewById(R.id.storge_grid2);
         bn = (Button)findViewById(R.id.open_bn);
         bn2 = (Button)findViewById(R.id.open_bn2);
+
+        statusBar = (StatusBar) findViewById(R.id.status_bar);
+        statusBar.setAdapter(new CommonAdapter<FoodBean>(getApplicationContext(), mDatas2, R.layout.list_status_bar) {
+            @Override
+            public void convert(ViewHolder viewHolder, FoodBean item) {
+                viewHolder.setText(R.id.txt_status, item.getName());
+//                viewHolder.setImageResource(R.id.img_status, item.getImgId());
+
+                notifyDataSetChanged();
+            }
+        });
 
         bn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,14 +138,14 @@ public class FoodInfoGrid extends Activity {
                 m3GridView.setVisibility(View.GONE);
                 Toast.makeText(FoodInfoGrid.this,"长点击事件",Toast.LENGTH_LONG).show();
 //                mGridAdapter.setIsShowDelete(isShowDelete);
-
-
-
-
                 mAdapter.notifyDataSetChanged();
-
-
                 return true;
+            }
+        });
+        m3GridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             }
         });
 
